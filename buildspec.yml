@@ -1,15 +1,24 @@
-server:
-  port: 5000
+version: 0.2
 
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/Crud
-    username: root
-    password: 12345678
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+phases:
+  install:
+    commands:
+      - echo Installing dependencies...
+      - mvn install
+
+  pre_build:
+    commands:
+      - echo Preparing for build...
+
+  build:
+    commands:
+      - echo Building the project...
+      - mvn clean package  # Este comando compila el proyecto y genera el archivo JAR/WAR
+
+  post_build:
+    commands:
+      - echo Build completed.
+      
+artifacts:
+  files:
+    - target/*.jar  # O target/*.war, dependiendo del empaquetado de tu proyecto
