@@ -3,22 +3,15 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Installing dependencies...
-      - mvn install
-
-  pre_build:
-    commands:
-      - echo Preparing for build...
-
+      - echo Installing Maven...
+      - yum install -y maven
   build:
     commands:
-      - echo Building the project...
-      - mvn clean package  # Este comando compila el proyecto y genera el archivo JAR/WAR
-
+      - echo Build started on `date`
+      - mvn clean install
   post_build:
     commands:
-      - echo Build completed.
-      
+      - echo Build completed on `date`
 artifacts:
   files:
-    - target/*.jar  # O target/*.war, dependiendo del empaquetado de tu proyecto
+    - target/*.jar
